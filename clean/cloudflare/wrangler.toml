@@ -1,0 +1,43 @@
+# ══════════════════════════════════════════════════════════════════════════════
+#  wrangler.toml — Cloudflare Pages + Worker configuration
+#
+#  SETUP:
+#  1. npm install -g wrangler
+#  2. wrangler login
+#  3. Set secrets: wrangler pages secret put API_SECRET_KEY
+#                  wrangler pages secret put RAILWAY_API_URL
+#  4. Deploy: wrangler pages deploy . --project-name=asset-management
+# ══════════════════════════════════════════════════════════════════════════════
+
+name = "asset-management"
+
+# ── Pages project (static site + Worker) ─────────────────────────────────────
+pages_build_output_dir = "."
+
+# ── Compatibility ─────────────────────────────────────────────────────────────
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Environment variables (non-secret, public config) ────────────────────────
+# Secrets (API keys) must be set via dashboard or `wrangler pages secret put`
+# DO NOT put API keys here — use secrets instead
+
+[vars]
+NODE_ENV = "production"
+
+# ── Production environment ────────────────────────────────────────────────────
+[env.production]
+name = "asset-management"
+
+[env.production.vars]
+NODE_ENV = "production"
+# RAILWAY_API_URL and API_SECRET_KEY must be set as secrets:
+# wrangler pages secret put RAILWAY_API_URL --env production
+# wrangler pages secret put API_SECRET_KEY  --env production
+
+# ── Preview / staging environment ────────────────────────────────────────────
+[env.preview]
+name = "asset-management-preview"
+
+[env.preview.vars]
+NODE_ENV = "development"
