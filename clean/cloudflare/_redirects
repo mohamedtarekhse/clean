@@ -1,0 +1,6 @@
+# Cloudflare Pages _redirects file
+# Place this at the root of your site (same folder as index.html)
+# The Worker handles /api/* proxying — this ensures SPA routing works
+
+# All non-asset routes serve the HTML file (SPA fallback)
+/*    /index.html   200
